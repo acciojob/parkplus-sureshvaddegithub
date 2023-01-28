@@ -41,19 +41,19 @@ public class ReservationServiceImpl implements ReservationService {
         for(Spot spot :spotList){
 
             if(numberOfWheels > 4 ){
-                if( spot.getSpotType().toString().equals("OTHERS") && spot.getOccupiad() == false && spot.getPricePerHour()<min){
+                if( spot.getSpotType().toString().equals("OTHERS") && spot.getOccupied() == false && spot.getPricePerHour()<min){
                     min = spot.getPricePerHour();
                     spot1 = spot;
                 }
             }
             else if ( numberOfWheels > 2 ){
-                if(("FOUR_WHEELER".equals(spot.getSpotType().toString())|| spot.getSpotType().toString().equals("OTHERS")) && spot.getOccupiad() == false && spot.getPricePerHour()<min){
+                if(("FOUR_WHEELER".equals(spot.getSpotType().toString())|| spot.getSpotType().toString().equals("OTHERS")) && spot.getOccupied() == false && spot.getPricePerHour()<min){
                     min = spot.getPricePerHour();
                     spot1 = spot;
                 }
             }
             else{
-                if(spot.getOccupiad() == false && spot.getPricePerHour()<min){
+                if(spot.getOccupied() == false && spot.getPricePerHour()<min){
                     min = spot.getPricePerHour();
                     spot1 = spot;
                 }
@@ -65,7 +65,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
         spotList.remove(spot1);
 
-        spot1.setOccupiad(true);
+        spot1.setOccupied(true);
 
 
         Reservation reservation = new Reservation();

@@ -13,7 +13,7 @@ public class Spot {
     @Enumerated(value = EnumType.STRING)
     private SpotType spotType;
     private int pricePerHour;
-    private boolean occupiad;
+    private boolean occupied;
 
     @ManyToOne
     @JoinColumn
@@ -25,10 +25,10 @@ public class Spot {
     public Spot() {
     }
 
-    public Spot(SpotType spotType, int pricePerHour, Boolean occupiad) {
+    public Spot(SpotType spotType, int pricePerHour, boolean occupied) {
         this.spotType = spotType;
         this.pricePerHour = pricePerHour;
-        this.occupiad = occupiad;
+        this.occupied = occupied;
     }
 
     public int getId() {
@@ -55,12 +55,12 @@ public class Spot {
         this.pricePerHour = pricePerHour;
     }
 
-    public boolean getOccupiad() {
-        return occupiad;
+    public boolean getOccupied() {
+        return occupied;
     }
 
-    public void setOccupiad(Boolean occupiad) {
-        this.occupiad = occupiad;
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
     }
 
     public ParkingLot getParkingLot() {
