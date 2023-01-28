@@ -25,12 +25,12 @@ public class ReservationServiceImpl implements ReservationService {
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
 
         if(!parkingLotRepository3.findById(parkingLotId).isPresent()) {
-            throw new Exception("null");
+            throw new Exception("Cannot make reservation");
         }
         ParkingLot parkingLot = parkingLotRepository3.findById(parkingLotId).get();
 
         if(!userRepository3.findById(userId).isPresent()) {
-            throw new Exception("null");
+            throw new Exception("Cannot make reservation");
         }
         User user = userRepository3.findById(userId).get();
         List<Spot> spotList = parkingLot.getSpotList();
@@ -65,7 +65,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
         spotList.remove(spot1);
 
-
+        spot1.setOccupied(true);
 
 
         Reservation reservation = new Reservation();
