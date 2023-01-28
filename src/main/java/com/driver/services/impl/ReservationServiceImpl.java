@@ -65,7 +65,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
         spotList.remove(spot1);
 
-        spot1.setOccupied(true);
+
 
 
         Reservation reservation = new Reservation();
