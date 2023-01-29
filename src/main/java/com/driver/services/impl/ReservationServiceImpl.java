@@ -63,6 +63,8 @@ public class ReservationServiceImpl implements ReservationService {
         if(spot1 == null){
             throw  new Exception("Cannot make reservation");
         }
+        spotList.remove(spot1);
+
         spot1.setOccupied(true);
 
 
@@ -71,16 +73,15 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setSpot(spot1);
         reservation.setUser(user);
 
+
         user.getReservationList().add(reservation);
-
-
         spot1.getReservationList().add(reservation);
-
+        spotList.add(spot1);
 
         parkingLot.setSpotList(spotList);
         parkingLotRepository3.save(parkingLot);
         userRepository3.save(user);
-
+        spotRepository3.save(spot1);
         return reservation;
     }
 }
