@@ -34,6 +34,9 @@ public class ReservationServiceImpl implements ReservationService {
 //            throw new Exception("Cannot make reservation");
 //        }
             User user = userRepository3.findById(userId).get();
+            if(user ==null || parkingLot==null){
+                throw new Exception("Cannot make reservation");
+            }
             List<Spot> spotList = parkingLot.getSpotList();
 
             Spot spot1 = null;
@@ -46,7 +49,7 @@ public class ReservationServiceImpl implements ReservationService {
                         spot1 = spot;
                     }
                 } else if (numberOfWheels > 2) {
-                    if (("FOUR_WHEELER".equals(spot.getSpotType().toString()) || spot.getSpotType().toString().equals("OTHERS")) && !spot.getOccupied() && spot.getPricePerHour() < spot1.getPricePerHour()) {
+                    if (("FOUR_WHEELER".equals(spot.getSpotType().toString())) && !spot.getOccupied() && spot.getPricePerHour() < spot1.getPricePerHour()) {
                         spot1 = spot;
                     }
                 } else {
