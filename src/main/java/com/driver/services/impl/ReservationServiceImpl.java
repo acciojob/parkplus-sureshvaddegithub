@@ -40,20 +40,24 @@ public class ReservationServiceImpl implements ReservationService {
             List<Spot> spotList = parkingLot.getSpotList();
 
             Spot spot1 = null;
+            int amt = Integer.MAX_VALUE;
 
 
             for (Spot spot : spotList) {
 
                 if (numberOfWheels > 4) {
-                    if (spot.getSpotType()==SpotType.OTHERS && !spot.getOccupied() && spot.getPricePerHour() <= spot1.getPricePerHour()) {
+                    if (spot.getSpotType()==SpotType.OTHERS && !spot.getOccupied() && spot.getPricePerHour() <= amt) {
+                        amt = spot.getPricePerHour();
                         spot1 = spot;
                     }
                 } else if (numberOfWheels > 2) {
-                    if ((spot.getSpotType()==SpotType.FOUR_WHEELER && !spot.getOccupied() && spot.getPricePerHour() <= spot1.getPricePerHour())) {
+                    if (spot.getSpotType()==SpotType.FOUR_WHEELER && !spot.getOccupied() && spot.getPricePerHour() <= amt) {
+                        amt = spot.getPricePerHour();
                         spot1 = spot;
                     }
                 } else {
-                    if ((!spot.getOccupied()) && (spot.getPricePerHour() <= spot1.getPricePerHour())) {
+                    if ((!spot.getOccupied()) && (spot.getPricePerHour() <= amt)) {
+                        amt = spot.getPricePerHour();
                         spot1 = spot;
                     }
                 }
