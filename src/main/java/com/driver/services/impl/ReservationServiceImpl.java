@@ -39,24 +39,24 @@ public class ReservationServiceImpl implements ReservationService {
             }
             List<Spot> spotList = parkingLot.getSpotList();
 
-            Spot spot1 = null;
-            int amt = Integer.MAX_VALUE;
 
+            int amt = Integer.MAX_VALUE;
+            Spot spot1 = null;
 
             for (Spot spot : spotList) {
+                if (spot.getOccupied() == false && numberOfWheels > 4 && spot.getSpotType() == SpotType.OTHERS) {
+                    if (amt >= spot.getPricePerHour()) {
+                        amt = spot.getPricePerHour();
+                        spot1 = spot;
+                    }
+                } else if (spot.getOccupied() == false && (numberOfWheels > 2 && numberOfWheels <= 4) && spot.getSpotType() == SpotType.FOUR_WHEELER) {
+                    if (amt >= spot.getPricePerHour()) {
+                        amt = spot.getPricePerHour();
+                        spot1 = spot;
+                    }
 
-                if (numberOfWheels > 4) {
-                    if (spot.getSpotType()==SpotType.OTHERS && !spot.getOccupied() && spot.getPricePerHour() <= amt) {
-                        amt = spot.getPricePerHour();
-                        spot1 = spot;
-                    }
-                } else if (numberOfWheels > 2) {
-                    if (spot.getSpotType()==SpotType.FOUR_WHEELER && !spot.getOccupied() && spot.getPricePerHour() <= amt) {
-                        amt = spot.getPricePerHour();
-                        spot1 = spot;
-                    }
                 } else {
-                    if ((!spot.getOccupied()) && (spot.getPricePerHour() <= amt)) {
+                    if (spot.getOccupied() == false && amt >= spot.getPricePerHour()) {
                         amt = spot.getPricePerHour();
                         spot1 = spot;
                     }
